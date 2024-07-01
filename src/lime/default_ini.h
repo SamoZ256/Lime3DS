@@ -99,7 +99,7 @@ cpu_clock_percentage =
 
 [Renderer]
 # Whether to render using OpenGL or Software
-# 0: Software, 1: OpenGL (default), 2: Vulkan
+# 0: Software, 1: OpenGL (default), 2: Vulkan, 3: Metal
 graphics_api =
 
 # Whether to render using GLES or OpenGL

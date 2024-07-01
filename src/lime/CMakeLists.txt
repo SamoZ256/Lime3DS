@@ -32,6 +32,12 @@ if (ENABLE_VULKAN)
         emu_window/emu_window_sdl2_vk.h
     )
 endif()
+if (ENABLE_METAL)
+    target_sources(lime PRIVATE
+        emu_window/emu_window_sdl2_mtl.cpp
+        emu_window/emu_window_sdl2_mtl.h
+    )
+endif()
 
 create_target_directory_groups(lime)
 

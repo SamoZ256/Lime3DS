@@ -22,6 +22,9 @@
 #ifdef ENABLE_VULKAN
 #include "lime/emu_window/emu_window_sdl2_vk.h"
 #endif
+#ifdef ENABLE_METAL
+#include "lime/emu_window/emu_window_sdl2_mtl.h"
+#endif
 #include "common/common_paths.h"
 #include "common/detached_tasks.h"
 #include "common/file_util.h"
@@ -369,6 +372,10 @@ int main(int argc, char** argv) {
         case Settings::GraphicsAPI::Vulkan:
             return std::make_unique<EmuWindow_SDL2_VK>(system, fullscreen, is_secondary);
 #endif
+#ifdef ENABLE_METAL
+        case Settings::GraphicsAPI::Metal:
+            return std::make_unique<EmuWindow_SDL2_MTL>(system, fullscreen, is_secondary);
+#endif
 #ifdef ENABLE_SOFTWARE_RENDERER
         case Settings::GraphicsAPI::Software:
             return std::make_unique<EmuWindow_SDL2_SW>(system, fullscreen, is_secondary);
@@ -382,6 +389,8 @@ int main(int argc, char** argv) {
             return std::make_unique<EmuWindow_SDL2_GL>(system, fullscreen, is_secondary);
 #elif ENABLE_VULKAN
             return std::make_unique<EmuWindow_SDL2_VK>(system, fullscreen, is_secondary);
+#elif ENABLE_METAL
+            return std::make_unique<EmuWindow_SDL2_MTL>(system, fullscreen, is_secondary);
 #elif ENABLE_SOFTWARE_RENDERER
             return std::make_unique<EmuWindow_SDL2_SW>(system, fullscreen, is_secondary);
 #else

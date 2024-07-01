@@ -50,5 +50,11 @@ if (ENABLE_VULKAN)
         target_link_libraries(lime-android PRIVATE adrenotools)
     endif()
 endif()
+if (ENABLE_METAL)
+    target_sources(lime-android PRIVATE
+        emu_window/emu_window_mtl.cpp
+        emu_window/emu_window_mtl.h
+    )
+endif()
 
 set(CPACK_PACKAGE_EXECUTABLES ${CPACK_PACKAGE_EXECUTABLES} lime-android)

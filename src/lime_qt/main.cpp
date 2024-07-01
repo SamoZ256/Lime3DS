@@ -3066,10 +3066,10 @@ void GMainWindow::UpdateVolumeUI() {
 
 void GMainWindow::UpdateAPIIndicator(bool update) {
     static std::array graphics_apis = {QStringLiteral("SOFTWARE"), QStringLiteral("OPENGL"),
-                                       QStringLiteral("VULKAN")};
+                                       QStringLiteral("VULKAN"), QStringLiteral("METAL")};
 
     static std::array graphics_api_colors = {QStringLiteral("#3ae400"), QStringLiteral("#00ccdd"),
-                                             QStringLiteral("#91242a")};
+                                             QStringLiteral("#91242a"), QStringLiteral("#e3bd42")};
 
     u32 api_index = static_cast<u32>(Settings::values.graphics_api.GetValue());
     if (update) {
@@ -3087,6 +3087,11 @@ void GMainWindow::UpdateAPIIndicator(bool update) {
 #endif
 #ifndef ENABLE_VULKAN
         if (api_index == static_cast<u32>(Settings::GraphicsAPI::Vulkan)) {
+            api_index = (api_index + 1) % graphics_apis.size();
+        }
+#endif
+#ifndef ENABLE_METAL
+        if (api_index == static_cast<u32>(Settings::GraphicsAPI::Metal)) {
             api_index = (api_index + 1) % graphics_apis.size();
         }
 #endif

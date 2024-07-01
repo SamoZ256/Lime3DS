@@ -10,6 +10,8 @@ set(HASH_FILES
     "${VIDEO_CORE}/renderer_opengl/gl_shader_util.h"
     "${VIDEO_CORE}/renderer_vulkan/vk_shader_util.cpp"
     "${VIDEO_CORE}/renderer_vulkan/vk_shader_util.h"
+    "${VIDEO_CORE}/renderer_metal/mtl_shader_util.cpp"
+    "${VIDEO_CORE}/renderer_metal/mtl_shader_util.h"
     "${VIDEO_CORE}/shader/generator/glsl_fs_shader_gen.cpp"
     "${VIDEO_CORE}/shader/generator/glsl_fs_shader_gen.h"
     "${VIDEO_CORE}/shader/generator/glsl_shader_decompiler.cpp"

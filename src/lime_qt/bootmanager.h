@@ -193,6 +193,9 @@ private:
 #ifdef ENABLE_VULKAN
     void InitializeVulkan();
 #endif
+#ifdef ENABLE_METAL
+    void InitializeMetal();
+#endif
 #ifdef ENABLE_SOFTWARE_RENDERER
     void InitializeSoftware();
 #endif

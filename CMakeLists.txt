@@ -82,6 +82,9 @@ CMAKE_DEPENDENT_OPTION(ENABLE_LIBUSB "Enable libusb for GameCube Adapter support
 CMAKE_DEPENDENT_OPTION(ENABLE_SOFTWARE_RENDERER "Enables the software renderer" ON "NOT ANDROID" OFF)
 CMAKE_DEPENDENT_OPTION(ENABLE_OPENGL "Enables the OpenGL renderer" ON "NOT APPLE" OFF)
 option(ENABLE_VULKAN "Enables the Vulkan renderer" ON)
+if(APPLE)
+    option(ENABLE_METAL "Enables the Metal renderer" ON)
+endif()
 
 option(USE_DISCORD_PRESENCE "Enables Discord Rich Presence" OFF)
 

@@ -198,6 +198,51 @@ if (ENABLE_VULKAN)
     )
     target_link_libraries(video_core PRIVATE vulkan-headers vma sirit SPIRV glslang)
 endif()
+if (ENABLE_METAL)
+    target_sources(video_core PRIVATE
+        renderer_metal/pica_to_mtl.h
+        renderer_metal/renderer_metal.cpp
+        renderer_metal/renderer_metal.h
+        renderer_metal/mtl_blit_helper.cpp
+        renderer_metal/mtl_blit_helper.h
+        renderer_metal/mtl_common.cpp
+        renderer_metal/mtl_common.h
+        renderer_metal/mtl_descriptor_update_queue.cpp
+        renderer_metal/mtl_descriptor_update_queue.h
+        renderer_metal/mtl_graphics_pipeline.cpp
+        renderer_metal/mtl_graphics_pipeline.h
+        renderer_metal/mtl_master_semaphore.cpp
+        renderer_metal/mtl_master_semaphore.h
+        renderer_metal/mtl_memory_util.cpp
+        renderer_metal/mtl_memory_util.h
+        renderer_metal/mtl_rasterizer.cpp
+        renderer_metal/mtl_rasterizer.h
+        renderer_metal/mtl_rasterizer_cache.cpp
+        renderer_metal/mtl_scheduler.cpp
+        renderer_metal/mtl_scheduler.h
+        renderer_metal/mtl_resource_pool.cpp
+        renderer_metal/mtl_resource_pool.h
+        renderer_metal/mtl_instance.cpp
+        renderer_metal/mtl_instance.h
+        renderer_metal/mtl_pipeline_cache.cpp
+        renderer_metal/mtl_pipeline_cache.h
+        renderer_metal/mtl_platform.cpp
+        renderer_metal/mtl_platform.h
+        renderer_metal/mtl_present_window.cpp
+        renderer_metal/mtl_present_window.h
+        renderer_metal/mtl_render_manager.cpp
+        renderer_metal/mtl_render_manager.h
+        renderer_metal/mtl_shader_util.cpp
+        renderer_metal/mtl_shader_util.h
+        renderer_metal/mtl_stream_buffer.cpp
+        renderer_metal/mtl_stream_buffer.h
+        renderer_metal/mtl_swapchain.cpp
+        renderer_metal/mtl_swapchain.h
+        renderer_metal/mtl_texture_runtime.cpp
+        renderer_metal/mtl_texture_runtime.h
+    )
+    target_link_libraries(video_core PRIVATE vulkan-headers vma sirit SPIRV glslang)
+endif()
 
 add_dependencies(video_core host_shaders)
 target_include_directories(video_core PRIVATE ${HOST_SHADERS_INCLUDE})

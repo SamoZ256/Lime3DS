@@ -21,6 +21,7 @@ enum class GraphicsAPI {
     Software = 0,
     OpenGL = 1,
     Vulkan = 2,
+    Metal = 3,
 };
 
 enum class InitClock : u32 {
@@ -457,13 +458,15 @@ struct Values {
         GraphicsAPI::OpenGL,
 #elif defined(ENABLE_VULKAN)
         GraphicsAPI::Vulkan,
+#elif defined(ENABLE_METAL)
+        GraphicsAPI::Metal,
 #elif defined(ENABLE_SOFTWARE_RENDERER)
         GraphicsAPI::Software,
 #else
 // TODO: Add a null renderer backend for this, perhaps.
 #error "At least one renderer must be enabled."
 #endif
-        GraphicsAPI::Software, GraphicsAPI::Vulkan, "graphics_api"};
+        GraphicsAPI::Software, GraphicsAPI::Metal, "graphics_api"};
     SwitchableSetting<u32> physical_device{0, "physical_device"};
     Setting<bool> use_gles{false, "use_gles"};
     Setting<bool> renderer_debug{false, "renderer_debug"};

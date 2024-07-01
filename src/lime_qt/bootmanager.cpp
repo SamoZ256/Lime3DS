@@ -327,6 +327,21 @@ public:
 };
 #endif
 
+#ifdef ENABLE_METAL
+class MetalRenderWidget : public RenderWidget {
+public:
+    explicit MetalRenderWidget(GRenderWindow* parent) : RenderWidget(parent) {
+        setAttribute(Qt::WA_NativeWindow);
+        setAttribute(Qt::WA_PaintOnScreen);
+        windowHandle()->setSurfaceType(QWindow::MetalSurface);
+    }
+
+    QPaintEngine* paintEngine() const override {
+        return nullptr;
+    }
+};
+#endif
+
 #ifdef ENABLE_SOFTWARE_RENDERER
 struct SoftwareRenderWidget : public RenderWidget {
     explicit SoftwareRenderWidget(GRenderWindow* parent, Core::System& system_)
@@ -657,6 +672,11 @@ bool GRenderWindow::InitRenderTarget() {
         InitializeVulkan();
         break;
 #endif
+#ifdef ENABLE_METAL
+    case Settings::GraphicsAPI::Metal:
+        InitializeMetal();
+        break;
+#endif
     default:
         LOG_CRITICAL(Frontend,
                      "Unknown or unsupported graphics API {}, falling back to available default",
@@ -667,6 +687,8 @@ bool GRenderWindow::InitRenderTarget() {
         }
 #elif ENABLE_VULKAN
         InitializeVulkan();
+#elif ENABLE_VULKAN
+        InitializeMetal();
 #elif ENABLE_SOFTWARE_RENDERER
         InitializeSoftware();
 #else
@@ -798,6 +820,15 @@ bool GRenderWindow::LoadOpenGL() {
 #ifdef ENABLE_VULKAN
 void GRenderWindow::InitializeVulkan() {
     auto child = new VulkanRenderWidget(this);
+    child_widget = child;
+    child_widget->windowHandle()->create();
+    main_context = std::make_unique<DummyContext>();
+}
+#endif
+
+#ifdef ENABLE_METAL
+void GRenderWindow::InitializeMetal() {
+    auto child = new MetalRenderWidget(this);
     child_widget = child;
     child_widget->windowHandle()->create();
     main_context = std::make_unique<DummyContext>();
